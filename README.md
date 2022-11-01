@@ -3,7 +3,7 @@
 > jQuery와 javaScript로 애니메이션들을 구현하여 한 곳에 모은 페이지
 > 마우스, 스크롤, 슬라이드
 
-https://hoseonkwak.github.io/kwdream_project/main.html
+https://hoseonkwak.github.io/animation_example/index.html
 
 ## 📚라이브러리
 
