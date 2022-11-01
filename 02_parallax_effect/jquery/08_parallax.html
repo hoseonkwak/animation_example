@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - scroll 애니메이션</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&amp;display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <style>
+        .paral_nav{position: fixed; right: 20px; top: 20px; background: rgba(0, 0, 0, 0.4); padding: 12px 10px; border-radius: 50px; z-index: 9999; transition: top 0.4s ease;}
+        .paral_nav ul{display: flex; padding: 2px 10px;}
+        .paral_nav ul li{width: 40px; height: 40px; font-size: 16px; line-height: 40px; cursor: pointer; text-align: center;}
+        .paral_nav ul li + li{margin-left: 5px;}
+        .paral_nav ul li.active{background: #fff; border: 2px solid #fff; color: #000; border-radius: 30px;}
+        .paral_nav ul li.active span{opacity: 1;}
+        .paral_cont .content-item .num{font-family: 'Lato', sans-serif; font-weight: 100; font-size: 25vw; color: #000; opacity: 0.2; position: absolute; right: -5vw; top: -7vw; user-select: none;}
+        .paral_cont .content-item .title{padding-bottom: 10px; font-weight: 700;}
+        .paral_cont .content-item .img-wrap{width: 100%; padding-bottom: 56%; background: transparent; position: relative; overflow: hidden;}
+        .paral_cont .content-item .img-wrap .img{position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; background-size: cover; background-repeat: no-repeat; filter: saturate(0%); -webkit-filter: saturate(20%); transition: filter 1s, -webkit-filter 1s;}
+        .paral_cont .content-item .desc{font-size: 6vw; line-height: 1.4; margin-top: -6vw; margin-right: -3vw; position: relative; z-index: 100; word-break: keep-all;}
+
+        /* reveal */
+        .reveal > div,
+        .reveal > span{opacity: 0;}
+        .reveal.show > div,
+        .reveal.show > span{animation: opacity 1s 0.2s linear forwards;}
+        .reveal{position: relative;}
+        .reveal::before{content: ''; position: absolute; right: 0; top: 0; width: 0; height: 100%; z-index: 100; background-color: #fff;}
+        .reveal.reveal-two::after{content: ''; position: absolute; right: 0; top: 0; width: 0; height: 100%; z-index: 100; background-color: #9f93bb;}
+        /* 기본값 */
+        .reveal.show::before{animation: reveal 1s cubic-bezier(0.77, 0, 0.18, 1);}
+        .reveal.reveal-r.show::before {animation: reveal-r 1000ms cubic-bezier(0.77, 0, 0.18, 1);}
+        .reveal.reveal-t.show::before {animation: reveal-t 1000ms cubic-bezier(0.77, 0, 0.18, 1);}
+        .reveal.reveal-b.show::before {animation: reveal-b 1000ms cubic-bezier(0.77, 0, 0.18, 1);}
+        
+        /* 두 가지 */
+        .reveal.show::after {animation: reveal 1000ms 300ms cubic-bezier(0.77, 0, 0.18, 1);}
+        .reveal.reveal-r.show::after {animation: reveal-r 1000ms 300ms cubic-bezier(0.77, 0, 0.18, 1);}
+        .reveal.reveal-t.show::after {animation: reveal-t 1000ms 300ms cubic-bezier(0.77, 0, 0.18, 1);}
+        .reveal.reveal-b.show::after {animation: reveal-b 1000ms 300ms cubic-bezier(0.77, 0, 0.18, 1);}
+
+        @keyframes opacity {
+            0%, 60%{opacity: 0;}
+            70%, 100%{opacity: 1;}
+        }
+
+        @keyframes reveal {
+            0%{width: 0; left: 0;}
+            50%, 80%{width: 100%; left: 0;}
+            100%{width: 0; left: 100%;}
+        }
+
+        @keyframes reveal-r {
+            0%{width: 0; right: 0;}
+            50%, 80%{width: 100%; right: 0;}
+            100%{width: 0; right: 100%;}
+        }
+
+        @keyframes reveal-t {
+            0%{width: 100%; height: 0; top: auto; top: 0;}
+            50%, 80%{width: 100%; height: 100%; top: auto; top: 0;}
+            100%{width: 100%; height: 0; top: auto; top: 100%;}
+        }
+
+        @keyframes reveal-b {
+            0%{width: 100%; height: 0; top: auto; bottom: 0;}
+            50%, 80%{width: 100%; height: 100%; top: auto; bottom: 0;}
+            100%{width: 100%; height: 0; top: auto; bottom: 100%;}
+        }
+    </style>
+</head>
+
+<body style="background: #d3b771;">
+    <header class="paral_info">
+        <h1><a href="../jquery/08_parallax.html">jQuery Parallax Effect08</a></h1>
+        <p>패럴랙스 스크롤링 효과 - 리빌효과</p>
+    </header>
+    <div class="paral_scroll">ScrollTop(): <span>0</span></div>
+    <!-- //scroll -->
+    <nav class="paral_nav">
+        <ul>
+            <li class="active">s1</li>
+            <li>s2</li>
+            <li>s3</li>
+            <li>s4</li>
+            <li>s5</li>
+            <li>s6</li>
+            <li>s7</li>
+            <li>s8</li>
+            <li>s9</li>
+        </ul>
+    </nav>
+    <!-- //paral_nav -->
+
+    <div class="paral_cont">
+        <section class="section1 content-item">
+            <span class="num">01</span>
+            <h2 class="title">Section1</h2>
+            <figure class="img-wrap reveal">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal" data-delay="500"><span>지붕은 햇빛이 밝을 때 수리해야 합니다.</span></p>
+        </section>
+        <!-- //section1 -->
+
+        <section class="section2 content-item">
+            <span class="num">02</span>
+            <h2 class="title">Section2</h2>
+            <figure class="img-wrap reveal reveal-r">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-r" data-delay="500"><span>여가시간을 가지려면 시간을 잘 써라.</span></p>
+        </section>
+        <!-- //section2 -->
+
+        <section class="section3 content-item">
+            <span class="num">03</span>
+            <h2 class="title">Section3</h2>
+            <figure class="img-wrap reveal reveal-t">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-t" data-delay="500"><span>시간은 인간이 쓸 수 있는 가장 값진 것이다.</span></p>
+        </section>
+        <!-- //section3 -->
+
+        <section class="section4 content-item">
+            <span class="num">04</span>
+            <h2 class="title">Section4</h2>
+            <figure class="img-wrap reveal reveal-b">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-b" data-delay="500"><span>미래의 제국은 마음의 제국이다.</span></p>
+        </section>
+        <!-- //section4 -->
+
+        <section class="section5 content-item">
+            <span class="num">05</span>
+            <h2 class="title">Section5</h2>
+            <figure class="img-wrap reveal reveal-two">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-two" data-delay="500"><span>일 분 전만큼 먼 시간은 없다.</span></p>
+        </section>
+        <!-- //section5 -->
+    
+        <section class="section6 content-item">
+            <span class="num">06</span>
+            <h2 class="title">Section6</h2>
+            <figure class="img-wrap reveal reveal-two reveal-r">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-two reveal-r" data-delay="500"><span>복역 중이 아니라면, 충분한 시간이란 결코 없다.</span></p>
+        </section>
+        <!-- //section6 -->
+    
+        <section class="section7 content-item">
+            <span class="num">07</span>
+            <h2 class="title">Section7</h2>
+            <figure class="img-wrap reveal reveal-two reveal-t">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-two reveal-t" data-delay="500"><span>유행은 유행에 뒤떨어질 수 밖에 없게 만들어진다.</span></p>
+        </section>
+        <!-- //section7 -->
+    
+        <section class="section8 content-item">
+            <span class="num">08</span>
+            <h2 class="title">Section8</h2>
+            <figure class="img-wrap reveal reveal-two reveal-b">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-two reveal-b" data-delay="500"><span>시간은 환상이다. 점심시간은 두 배로 그렇다.</span></p>
+        </section>
+        <!-- //section8 -->
+
+        <section class="section9 content-item">
+            <span class="num">09</span>
+            <h2 class="title">Section9</h2>
+            <figure class="img-wrap reveal reveal-two">
+                <div class="img"></div>
+            </figure>
+            <p class="desc reveal reveal-two" data-delay="500"><span>낭비한 시간에 대한 후회는 더 큰 시간 낭비이다.</span></p>
+        </section>
+        <!-- //section9 -->
+    </div>
+    <!-- //contents -->
+    <footer class="paral_footer">
+        <h1>Parallax <em>Scrolling</em></h1>
+        <div class="footer_info">
+            <h2>JAVASCRIPT</h2>
+            <ul> 
+                <li><a href="../javascript/01_parallax.html">1</a></li>
+                <li><a href="../javascript/02_parallax.html">2</a></li>
+                <li><a href="../javascript/03_parallax.html">3</a></li>
+                <li><a href="../javascript/04_parallax.html">4</a></li>
+                <li><a href="../javascript/05_parallax.html">5</a></li>
+                <li><a href="../javascript/06_parallax.html">6</a></li>
+                <li><a href="../javascript/07_parallax.html">7</a></li>
+                <li><a href="../javascript/08_parallax.html">8</a></li>
+                <li><a href="../javascript/09_parallax.html">VH</a></li>
+            </ul>
+        </div>
+        <div class="footer_info">
+            <h2>JQUERY</h2>
+            <ul>
+                <li><a href="../jquery/01_parallax.html">1</a></li>
+                <li><a href="../jquery/02_parallax.html">2</a></li>
+                <li><a href="../jquery/03_parallax.html">3</a></li>
+                <li><a href="../jquery/04_parallax.html">4</a></li>
+                <li><a href="../jquery/05_parallax.html">5</a></li>
+                <li><a href="../jquery/06_parallax.html">6</a></li>
+                <li><a href="../jquery/07_parallax.html">7</a></li>
+                <li class="active"><a href="../jquery/08_parallax.html">8</a></li>
+                <li><a href="../jquery/09_parallax.html">V</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script>
+    //버튼 클릭 시 영역 이동
+    $('.paral_nav ul li').click(function(e){
+        e.preventDefault();
+
+        let index = $(this).index();
+        let section = $('.paral_cont > section').eq(index);
+        let offset = section.offset().top;
+
+        $('html, body').animate({scrollTop: offset}, 600, 'easeInOutCirc');
+    });
+
+    //스크롤 이팩트
+    $(window).scroll(function(){
+        let scroll = $(this).scrollTop();
+
+        $('.reveal').each(function(){
+            let interval = $(this).data('delay');
+            if(scroll + $(window).innerHeight() >= $(this).offset().top){
+                //큐 사용
+                /*$(this).delay($(this).data("delay")).queue(function(){
+                    $(this).addClass('show');
+                });*/
+                if($(this).data('delay') == undefined){
+                    $(this).addClass('show');
+                }else{
+                    setTimeout(() => {
+                        $(this).addClass('show');
+                    }, interval);
+                }
+            }else{
+                $(this).removeClass('show');
+            }
+        });
+
+        //메뉴
+        $('.content-item').each(function(index){
+            //메뉴
+            if(scroll > $(this).offset().top - 2){
+                $('.paral_nav ul li').eq(index).addClass('active').siblings().removeClass('active');
+            }
+        });
+
+        //스크롤 표시
+        $('.paral_scroll span').text(parseInt(scroll)+'px');
+    });
+</script>
+
+</html>

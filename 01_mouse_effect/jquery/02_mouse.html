@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse effect2</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .mouseCont {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .mouseCont p {
+            font-size: 2.5vw;
+            line-height: 2.3;
+            font-weight: 300;
+        }
+
+        .mouseCont h2 {
+            font-size: 3vw;
+            font-weight: normal;
+            font-weight: 400;
+        }
+
+        .mouseCont em {
+            font-style: normal;
+            border-bottom: 0.2vw dashed rgb(0, 255, 242);
+            color: rgb(0, 255, 242);
+        }
+
+        .cursor {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 9999;
+            background-color: rgba(255, 255, 255, 0.9);
+            user-select: none;
+            pointer-events: none;
+            transition: transform 0.3s, opacity 0.2s;
+        }
+
+        .cursor.active {
+            opacity: .5;
+            transform: scale(0);
+        }
+
+        .cursor.show {
+            opacity: .5;
+            transform: scale(1);
+            background: rgb(77, 55, 8);
+        }
+
+        .cursor-follower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            user-select: none;
+            pointer-events: none;
+            transition: transform 0.6s ease-in-out, opacity 0.2s ease-in-out;
+        }
+
+        .cursor-follower.active {
+            opacity: .7;
+            transform: scale(5);
+            background: rgb(0, 255, 242);
+        }
+
+        .cursor-follower.show {
+            transform: scale(5);
+            background: rgba(161, 110, 0.6);
+        }
+
+        .info,
+        .info a {
+            cursor: none;
+        }
+    </style>
+</head>
+
+<body style="background: #8ab361;">
+    <main>
+        <div class="cursor"></div>
+        <div class="cursor-follower"></div>
+
+        <article class="mouseCont">
+            <p>I never think of <em>the future</em> - it comes soon enough</p>
+            <h2>나는 <em>미래</em>에 대해 생각하는 법이 없다. 어차피 곧 닥치니까</h2>
+        </article>
+    </main>
+    <div class="info">
+        <h1><a href="02_mouse.html">jQuery Mouse Effect02</a></h1>
+        <p>마우스 이펙트 - 마우스 따라다니기</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_mouse.html">1</a></li>
+            <li><a href="../javascript/02_mouse.html">2</a></li>
+            <li><a href="../javascript/03_mouse.html">3</a></li>
+            <li><a href="../javascript/04_mouse.html">4</a></li>
+            <li><a href="../javascript/05_mouse.html">5</a></li>
+            <li><a href="../javascript/06_mouse.html">6</a></li>
+            <li><a href="../javascript/07_mouse.html">7</a></li>
+            <li><a href="../javascript/08_mouse.html">8</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_mouse.html">1</a></li>
+            <li class="active"><a href="../jquery/02_mouse.html">2</a></li>
+            <li><a href="../jquery/03_mouse.html">3</a></li>
+            <li><a href="../jquery/04_mouse.html">4</a></li>
+            <li><a href="../jquery/05_mouse.html">5</a></li>
+            <li><a href="../jquery/06_mouse.html">6</a></li>
+            <li><a href="../jquery/07_mouse.html">7</a></li>
+            <li><a href="../jquery/08_mouse.html">8</a></li>
+        </ul>
+    </div>
+    <div class="info left list">
+        <ul>
+            <li>pageX : <span class="pageX"></span></li>
+            <li>pageY : <span class="pageY"></span></li>
+        </ul>
+    </div>
+</body>
+<script>
+    //출력용
+    $(window).mousemove(function(e){
+        $('.pageX').text(e.pageX + 'px');
+        $('.pageY').text(e.pageY + 'px');
+    });
+
+    //움직임 효과
+    const cursor = $(".cursor");
+    const follower = $(".cursor-follower");
+
+    $(window).mousemove(function(e){
+        gsap.to(cursor, { duration: 0.3, left: e.pageX - 5, top: e.pageY - 5 });
+        gsap.to(follower, { duration: 0.6, left: e.pageX - 15, top: e.pageY - 15 });
+    });
+
+    //오버 효과
+    $('.mouseCont em').hover(function(){
+        cursor.addClass('active');
+        follower.addClass('active');
+    }, function(){
+        cursor.removeClass('active');
+        follower.removeClass('active');
+    });
+
+    //오버 효과2
+    $('.info').hover(function(){
+        cursor.addClass('show');
+        follower.addClass('show');
+    }, function(){
+        cursor.removeClass('show');
+        follower.removeClass('show');
+    });
+</script>
+
+</html>

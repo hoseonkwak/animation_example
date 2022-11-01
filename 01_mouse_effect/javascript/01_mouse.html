@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 따라다니기</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+
+        .mouseCont p {
+            font-size: 2.5vw;
+            line-height: 2.3;
+            font-weight: 300;
+        }
+
+        .mouseCont h2 {
+            font-size: 3vw;
+            font-weight: normal;
+            font-weight: 400;
+        }
+
+        .mouseCont span {
+            font-style: normal;
+            border-bottom: 0.2vw dashed #fff;
+        }
+
+        .cursor {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            z-index: 9999;
+            background-color: rgba(255, 255, 255, 0.1);
+            user-select: none;
+            pointer-events: none;
+            transition:
+                background-color .2s,
+                border-color .2s,
+                border-radius .2s,
+                transform .6s
+        }
+
+        .cursor.style1 {
+            background-color: rgba(255, 187, 234, 0.4);
+            border-color: rgb(255, 187, 234);
+            transform: rotateX(720deg) scale(2);
+        }
+
+        .cursor.style2 {
+            background-color: rgb(140, 0, 255, 0.4);
+            border-color: rgb(140, 0, 255);
+            transform: rotateY(720deg) scale(2);
+        }
+
+        .cursor.style3 {
+            background-color: rgba(46, 51, 119, 0.4);
+            border-color: rgba(46, 51, 119);
+            background-image: url(../common/img/green1.jpg);
+            background-position: center;
+            background-size: cover;
+            transform: scale(2);
+        }
+
+        .cursor.style4 {
+            background-color: rgba(253, 255, 112, 0.4);
+            border-color: rgb(253, 255, 112);
+            border-radius: 5px;
+            background-image: url(../common/img/green2.png);
+            background-size: cover;
+            transform: scale(2);
+        }
+
+        .cursor.style5 {
+            background-color: rgba(168, 75, 255, 0.4);
+            border-color: rgba(168, 75, 255);
+            border-radius: 3px;
+            transform: scale(1.5) rotateY(90deg);
+        }
+
+        .cursor.style6 {
+            background-color: rgba(255, 165, 0, 0.4);
+            border-color: orange;
+            transform: rotateX(90deg)
+        }
+
+        
+          
+    </style>
+    
+</head>
+
+<body style="background: #b93131;">
+    <main>
+        <div class="cursor"></div>
+
+        <article class="mouseCont">
+            <p><span class="style1">mouse</span> <span class="style2">effect</span> jquery practice</p>
+            <h2><span class="style3">마우스</span> <span class="style4">효과연습입니다.</span> <span class="style5">커서에</span>
+                <span class="style6">따른 효과</span> 입니다.
+            </h2>
+        </article>
+    </main>
+    <div class="info">
+        <h1><a href="../javascript/01_mouse.html">javaScript Mouse Effect01</a></h1>
+        <p>마우스 이펙트 - 마우스 따라다니기</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li class="active"><a href="../javascript/01_mouse.html">1</a></li>
+            <li><a href="../javascript/02_mouse.html">2</a></li>
+            <li><a href="../javascript/03_mouse.html">3</a></li>
+            <li><a href="../javascript/04_mouse.html">4</a></li>
+            <li><a href="../javascript/05_mouse.html">5</a></li>
+            <li><a href="../javascript/06_mouse.html">6</a></li>
+            <li><a href="../javascript/07_mouse.html">7</a></li>
+            <li><a href="../javascript/08_mouse.html">8</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_mouse.html">1</a></li>
+            <li><a href="../jquery/02_mouse.html">2</a></li>
+            <li><a href="../jquery/03_mouse.html">3</a></li>
+            <li><a href="../jquery/04_mouse.html">4</a></li>
+            <li><a href="../jquery/05_mouse.html">5</a></li>
+            <li><a href="../jquery/06_mouse.html">6</a></li>
+            <li><a href="../jquery/07_mouse.html">7</a></li>
+            <li><a href="../jquery/08_mouse.html">8</a></li>
+        </ul>
+    </div>
+    <div class="info left list">
+        <ul>
+            <li>clientX : <span class="clientX"></span></li>
+            <li>clientY : <span class="clientY"></span></li>
+            <li>offsetX : <span class="offsetX"></span></li>
+            <li>offsetY : <span class="offsetY"></span></li>
+            <li>pageX : <span class="pageX"></span></li>
+            <li>pageY : <span class="pageY"></span></li>
+            <li>screenX : <span class="screenX"></span></li>
+            <li>screenY : <span class="screenY"></span></li>
+        </ul>
+    </div>
+</body>
+<script>
+    //출력용
+    window.addEventListener("mousemove", function (e) {
+        document.querySelector(".clientX").innerText = e.clientX + "px";
+        document.querySelector(".clientY").innerText = e.clientY + "px";
+        document.querySelector(".offsetX").innerText = e.offsetX + "px";
+        document.querySelector(".offsetY").innerText = e.offsetY + "px";
+        document.querySelector(".pageX").innerText = e.pageX + "px";
+        document.querySelector(".pageY").innerText = e.pageY + "px";
+        document.querySelector(".screenX").innerText = e.screenX + "px";
+        document.querySelector(".screenY").innerText = e.screenY + "px";
+    });
+
+    //마우스 움직임(좌표)
+    window.addEventListener("mousemove", function (e) {
+        let x = e.clientX - 25 + "px";
+        let y = e.clientY - 25 + "px";
+        document.querySelector(".cursor").style.cssText = "left:" + x + "; top:" + y;
+    });
+
+    //마우스 오버
+    document.querySelector(".mouseCont .style1").addEventListener("mouseover", function () {
+        document.querySelector(".cursor").classList.add("style1");
+    });
+    document.querySelector(".mouseCont .style1").addEventListener("mouseout", function () {
+        document.querySelector(".cursor").classList.remove("style1");
+    });
+    document.querySelector(".mouseCont .style2").addEventListener("mouseover", function () {
+        document.querySelector(".cursor").classList.add("style2");
+    });
+    document.querySelector(".mouseCont .style2").addEventListener("mouseout", function () {
+        document.querySelector(".cursor").classList.remove("style2");
+    });
+    document.querySelector(".mouseCont .style3").addEventListener("mouseover", function () {
+        document.querySelector(".cursor").classList.add("style3");
+    });
+    document.querySelector(".mouseCont .style3").addEventListener("mouseout", function () {
+        document.querySelector(".cursor").classList.remove("style3");
+    });
+    document.querySelector(".mouseCont .style4").addEventListener("mouseover", function () {
+        document.querySelector(".cursor").classList.add("style4");
+    });
+    document.querySelector(".mouseCont .style4").addEventListener("mouseout", function () {
+        document.querySelector(".cursor").classList.remove("style4");
+    });
+    document.querySelector(".mouseCont .style5").addEventListener("mouseover", function () {
+        document.querySelector(".cursor").classList.add("style5");
+    });
+    document.querySelector(".mouseCont .style5").addEventListener("mouseout", function () {
+        document.querySelector(".cursor").classList.remove("style5");
+    });
+    document.querySelector(".mouseCont .style6").addEventListener("mouseover", function () {
+        document.querySelector(".cursor").classList.add("style6");
+    });
+    document.querySelector(".mouseCont .style6").addEventListener("mouseout", function () {
+        document.querySelector(".cursor").classList.remove("style6");
+    });
+    /*$(function(){
+
+        //마우스 오버
+        $(".mouseCont .style1").hover(function () {
+            $(".cursor").addClass("style1");
+        }, function () {
+            $(".cursor").removeClass("style1");
+        });
+        $(".mouseCont .style2").hover(function () {
+            $(".cursor").addClass("style2");
+        }, function () {
+            $(".cursor").removeClass("style2");
+        });
+        $(".mouseCont .style3").hover(function () {
+            $(".cursor").addClass("style3");
+        }, function () {
+            $(".cursor").removeClass("style3");
+        });
+        $(".mouseCont .style4").hover(function () {
+            $(".cursor").addClass("style4");
+        }, function () {
+            $(".cursor").removeClass("style4");
+        });
+        $(".mouseCont .style5").hover(function () {
+            $(".cursor").addClass("style5");
+        }, function () {
+            $(".cursor").removeClass("style5");
+        });
+        $(".mouseCont .style6").hover(function () {
+            $(".cursor").addClass("style6");
+        }, function () {
+            $(".cursor").removeClass("style6");
+        });
+    });
+    */
+</script>
+</html>

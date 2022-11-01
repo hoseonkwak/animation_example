@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse effect 8</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .mouse-cont{display: flex; align-items: center; justify-content: center; flex-direction: column; color: #fff; width: 100%; height: 100vh; overflow: hidden; cursor: none; position: relative; z-index: 10;}
+        .mouse-cont p{font-size: 2.5vw; line-height: 2.3; font-weight: 300;}
+        .mouse-cont h2{font-size: 3vw; font-weight: 400;}
+        .mouse-cont em{font-style: normal; border-bottom: 0.2vw dashed #b1d699; color: #b1d699;}
+        .cursor{position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background-color: #ff8575; user-select: none; pointer-events: none; transition: transform 0.3s; mix-blend-mode: difference; z-index: 9999;}
+        .cursor.active{transform: scale(20);}
+        .info.left.list li.active{text-decoration: underline; color: rgb(221,111,111);}
+        .box-wrap{display: flex; align-items: center; justify-content: center; position: absolute; left: 0; top: 0; width: 100%; height: 100vh;}
+        .box-item{display: grid; grid-template-columns: repeat(10, 50px); grid-template-rows: repeat(4, 50px); grid-gap: 30px;}
+        .box-item .item{background-color: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: scale(0.2);}
+
+    </style>
+</head>
+<body style="background: #b93131;">
+    <main>
+        <div class="cursor"></div>
+
+        <article class="mouse-cont">
+            <p><em>A single day</em> is enough to make us a little larger</p>
+            <h2>우리를 조금 크게 만드는데 걸리는 시간은 단 <em>하루</em>면 충분하다</h2>
+        </article>
+        <div class="box-wrap">
+            <div class="box-item two">
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+            </div>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../javascript/08_mouse.html">javaScript Mouse Effect08</a></h1>
+        <p>마우스 이펙트 - 원 확대 효과</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_mouse.html">1</a></li>
+            <li><a href="../javascript/02_mouse.html">2</a></li>
+            <li><a href="../javascript/03_mouse.html">3</a></li>
+            <li><a href="../javascript/04_mouse.html">4</a></li>
+            <li><a href="../javascript/05_mouse.html">5</a></li>
+            <li><a href="../javascript/06_mouse.html">6</a></li>
+            <li><a href="../javascript/07_mouse.html">7</a></li>
+            <li class="active"><a href="../javascript/08_mouse.html">8</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_mouse.html">1</a></li>
+            <li><a href="../jquery/02_mouse.html">2</a></li>
+            <li><a href="../jquery/03_mouse.html">3</a></li>
+            <li><a href="../jquery/04_mouse.html">4</a></li>
+            <li><a href="../jquery/05_mouse.html">5</a></li>
+            <li><a href="../jquery/06_mouse.html">6</a></li>
+            <li><a href="../jquery/07_mouse.html">7</a></li>
+            <li><a href="../jquery/08_mouse.html">8</a></li>
+        </ul>
+    </div>
+    <div class="info left list">
+        <ul>
+            <li>pageX : <span class="pageX"></span></li>
+            <li>pageY : <span class="pageY"></span></li>
+        </ul>
+    </div>
+</body>
+<script>
+    document.addEventListener("mousemove", (e) => {
+        const item = document.querySelectorAll(".item");
+
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        item.forEach((item) => {
+            //1. 박스 모양 회전
+            // const itemX = item.offsetLeft + 20;
+            // const itemY = item.offsetTop + 20;
+            // const diffX = mouseX - itemX;
+            // const diffY = mouseY - itemY;
+            // const radians = Math.atan2(diffY, diffX);
+            // const angle = radians * 180 / Math.PI;
+
+            // item.style.transform = "rotate("+angle+"deg)";
+
+            //2. 원 모양 확대
+            const itemX = item.offsetLeft - mouseX;
+            const itemY = item.offsetTop - mouseY;
+            const dist = Math.sqrt(itemX * itemX + itemY * itemY);
+            console.log(dist);
+            const score = Math.exp(dist * -0.003);
+
+            item.style.transform = `scale(${score})`;
+        });
+
+        //커서
+        const cursor = document.querySelector(".cursor");
+        gsap.to(cursor, {duration: 0.3, left: mouseX - 10, top: mouseY - 10});
+
+        //출력
+        document.querySelector(".pageX").textContent = e.pageX;
+        document.querySelector(".pageY").textContent = e.pageY;
+    });
+</script>
+</html>

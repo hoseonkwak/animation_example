@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - scroll 애니메이션9</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&amp;display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <style>
+        header.paral_info{position: fixed; left: 0; top: 0; padding: 20px; z-index: 9999;}
+        .paraInfo{position: fixed; left: 20px; bottom: 70px; background: rgba(0, 0, 0, 0.4); color: #fff; padding: 20px; font-size: 12px; line-height: 1.8; border-radius: 10px; z-index: 999;}
+        .content_item{position: relative; width: 100%; height: 100vh;}
+        .content_wrap{position: fixed; left: 0; top: 0; display: flex;}
+        .content_wrap .content_item{width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative;}
+        .content_wrap .content_item .content_item_num{font-family: 'Lato'; font-size: 25vw; line-height: 1; opacity: 0.07; position: absolute; right: 5vw; top: 0;}
+        .content_wrap .content_item .content_item_title{font-size: 2vw; text-align: left; max-width: 1000px; width: 50vw;}
+        .content_wrap .content_item .content_item_img_wrap{width: 50vw; height: 60vh; position: relative; overflow: hidden; background-color: #eee;}
+        .content_wrap .content_item .content_item_img{position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; background-repeat: no-repeat; background-size: cover; background-position: center center; filter: saturate(10%); transition: all 0.2s;}
+        .content_wrap .content_item .content_item_img:hover{filter: saturate(100%);}
+        .content_wrap .content_item .content_item_desc{font-size: 4vw; line-height: 1.4; word-break: keep-all; margin-top: -6vw; margin-right: -3vw; position: relative; z-index: 100; padding-left: 30vw; padding-right: 10vw;}
+        .content_wrap .content_item .content_item_img.one{background-image: url(../common/img/bg1.jpg);}
+        .content_wrap .content_item:nth-child(2) .content_item_img{background-image: url(../common/img/bg2.jpg);}
+        .content_wrap .content_item:nth-child(3) .content_item_img{background-image: url(../common/img/bg3.jpg);}
+        .content_wrap .content_item:nth-child(4) .content_item_img{background-image: url(../common/img/bg4.jpg);}
+        .content_wrap .content_item:nth-child(5) .content_item_img{background-image: url(../common/img/bg5.jpg);}
+        .content_wrap .content_item:nth-child(6) .content_item_img{background-image: url(../common/img/bg6.jpg);}
+        .content_wrap .content_item:nth-child(7) .content_item_img{background-image: url(../common/img/bg7.jpg);}
+        .content_wrap .content_item:nth-child(8) .content_item_img{background-image: url(../common/img/bg8.jpg);}
+        .content_wrap .content_item:nth-child(9) .content_item_img{background-image: url(../common/img/bg9.jpg);}
+        
+    </style>
+</head>
+
+<body>
+    <header class="paral_info">
+        <h1><a href="../jquery/08_parallax.html">jQuery Parallax Effect09</a></h1>
+        <p>패럴랙스 스크롤링 효과 - 가로 모드</p>
+    </header>
+
+    <div class="paraInfo">
+        <ul>
+            <li>전체 가로 값 : <span class="scrollTotalWidth"></span>px</li>
+            <li>바디 높이 값 : <span class="bHeight"></span>px</li>
+            <li>비율 : <span class="ratio"></span>px</li>
+            <li>움직이기 : <span class="goLeft"></span>px</li>
+        </ul>
+    </div>
+    <div class="paral_cont">
+        <div class="content_wrap">
+            <section id="section1" class="content_item">
+                <span class="content_item_num">01</span>
+                <h2 class="content_item_title">Section1</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img one">
+                    </div>
+                </figure>
+                <p class="content_item_desc">높은 목표를 세우고, 스스로 채찍질 한다.</p>
+            </section>
+            <!-- //section1 -->
+            <section id="section2" class="content_item">
+                <span class="content_item_num">02</span>
+                <h2 class="content_item_title">Section2</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">결과도 중요하지만, 과정을 더 중요하게 생각한다.</p>
+            </section>
+            <!-- //section2 -->
+            <section id="section3" class="content_item">
+                <span class="content_item_num">03</span>
+                <h2 class="content_item_title">Section3</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">매 순간에 최선을 다하고, 끊임없이 변화한다.</p>
+            </section>
+            <!-- //section3 -->
+            <section id="section4" class="content_item">
+                <span class="content_item_num">04</span>
+                <h2 class="content_item_title">Section4</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">모든지 기본을 중요하게 생각하고 행동한다.</p>
+            </section>
+            <!-- //section4 -->
+            <section id="section5" class="content_item">
+                <span class="content_item_num">05</span>
+                <h2 class="content_item_title">Section5</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">열정을 잃지 않고 실패에서 실패로 걸어가는 것이 성공이다.</p>
+            </section>
+            <!-- //section5 -->
+            <section id="section6" class="content_item">
+                <span class="content_item_num">06</span>
+                <h2 class="content_item_title">Section6</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">천 마디 말보단 하나의 행동이 더 값지다.</p>
+            </section>
+            <!-- //section6 -->
+            <section id="section7" class="content_item">
+                <span class="content_item_num">07</span>
+                <h2 class="content_item_title">Section7</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">조그만 성공에 만족하지 않으며, 방심을 경계한다.</p>
+            </section>
+            <!-- //section7 -->
+            <section id="section8" class="content_item">
+                <span class="content_item_num">08</span>
+                <h2 class="content_item_title">Section8</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">나는 내가 더 노력할수록 운이 더 좋아진다는 걸 발견했다</p>
+            </section>
+            <!-- //section8 -->
+            <section id="section9" class="content_item">
+                <span class="content_item_num">09</span>
+                <h2 class="content_item_title">Section9</h2>
+                <figure class="content_item_img_wrap">
+                    <div class="content_item_img"></div>
+                </figure>
+                <p class="content_item_desc">꿈이 있다면, 그 꿈을 잡고 절대 놓아주지마라.</p>
+            </section>
+            <!-- //section9 -->
+        </div>
+    </div>
+    <!-- //contents -->
+    <!-- <footer class="paral_footer" style="margin-top: 100vh;">
+        <h1>Parallax <em>Scrolling</em></h1>
+        <div class="footer_info">
+            <h2>JAVASCRIPT</h2>
+            <ul> 
+                <li><a href="../javascript/01_parallax.html">1</a></li>
+                <li><a href="../javascript/02_parallax.html">2</a></li>
+                <li><a href="../javascript/03_parallax.html">3</a></li>
+                <li><a href="../javascript/04_parallax.html">4</a></li>
+                <li><a href="../javascript/05_parallax.html">5</a></li>
+                <li><a href="../javascript/06_parallax.html">6</a></li>
+                <li><a href="../javascript/07_parallax.html">7</a></li>
+                <li><a href="../javascript/08_parallax.html">8</a></li>
+                <li><a href="../javascript/09_parallax.html">VH</a></li>
+            </ul>
+        </div>
+        <div class="footer_info">
+            <h2>JQUERY</h2>
+            <ul>
+                <li><a href="../jquery/01_parallax.html">1</a></li>
+                <li><a href="../jquery/02_parallax.html">2</a></li>
+                <li><a href="../jquery/03_parallax.html">3</a></li>
+                <li><a href="../jquery/04_parallax.html">4</a></li>
+                <li><a href="../jquery/05_parallax.html">5</a></li>
+                <li><a href="../jquery/06_parallax.html">6</a></li>
+                <li><a href="../jquery/07_parallax.html">7</a></li>
+                <li><a href="../jquery/08_parallax.html">8</a></li>
+                <li class="active"><a href="../jquery/09_parallax.html">V</a></li>
+            </ul>
+        </div>
+    </footer> -->
+</body>
+<script>
+    const contentWrap = $(".content_wrap");
+        const contentItem = $(".content_item");
+        let lastScrollTop = 0;
+        let scrollTotalWidth = contentWrap.width();
+        $("body").height(scrollTotalWidth);
+        
+        $(window).scroll(function(){
+            let scrollTop = $(window).scrollTop();
+
+            let nWidth = scrollTotalWidth - $(window).width();
+            let nHeight = scrollTotalWidth - $(window).height();
+
+            let ratio = nWidth / nHeight;
+            let goLeft = scrollTop * ratio;
+
+            contentWrap.css("left", -goLeft);
+
+            //출력
+            $(".paraScroll span").text(scrollTop);
+            $(".scrollTotalWidth").text(scrollTotalWidth);
+            $(".bHeight").text($("body").height());
+            $(".ratio").text(ratio);
+            $(".goLeft").text(goLeft);
+        });
+        //출력
+        $(".scrollTotalWidth").text(scrollTotalWidth);
+</script>
+</html>

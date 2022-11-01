@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - 슬라이더2</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <style>
+        .slide_img{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 800px; height: 480px; overflow: hidden;}
+        .slide_img .slide_inner{position: relative; width: 4000px; height: 480px; transition: all 0.6s; left: 0;}
+        .slide_img .slide_inner .slide{float: left; width: 800px; height: 480px; position: relative;}
+    </style>
+</head>
+<body style="background: #9a79af;">
+    <main>
+        <div class="slide_wrap">
+            <div class="slide_img">
+                <div class="slide_inner">
+                    <div class="slide" data-name="이미지1"><img src="../common/img/bg1.jpg" alt="이미지1"></div>
+                    <div class="slide" data-name="이미지2"><img src="../common/img/bg2.jpg" alt="이미지2"></div>
+                    <div class="slide" data-name="이미지3"><img src="../common/img/bg3.jpg" alt="이미지3"></div>
+                    <div class="slide" data-name="이미지4"><img src="../common/img/bg4.jpg" alt="이미지4"></div>
+                    <div class="slide" data-name="이미지5"><img src="../common/img/bg5.jpg" alt="이미지5"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../jquery/02_slide.html">jQuery Slide Effect02</a></h1>
+        <p>이미지 슬라이드 - 좌로 슬라이드</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_slide.html">1</a></li>
+            <li><a href="../javascript/02_slide.html">2</a></li>
+            <li><a href="../javascript/03_slide.html">3</a></li>
+            <li><a href="../javascript/04_slide.html">4</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_slide.html">1</a></li>
+            <li class="active"><a href="../jquery/02_slide.html">2</a></li>
+            <li><a href="../jquery/03_slide.html">3</a></li>
+            <li><a href="../jquery/04_slide.html">4</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    const slide_wrap = $('.slide_wrap');
+    const slide_img = $('.slide_img');
+    const slide_inner = $('.slide_inner');
+    const slide = $('.slide');
+
+    let current_index = 0;
+    let slide_count = slide.length;
+    let slide_width = slide.width();
+    let slide_duration = 100;
+    let slide_easing = "easeOutExpo";
+    let interval = 3000;
+
+    setInterval(function() {
+        (current_index < slide_count-1) ? current_index++ : current_index = 0;
+
+        let slide_position = current_index * -slide_width;
+        slide_inner.animate({left: slide_position}, slide_duration, slide_easing);
+    }, interval);
+
+    
+</script>
+</html> 

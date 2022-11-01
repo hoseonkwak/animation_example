@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript - 슬라이더1</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .slide_wrap .slide_img{position: relative; width: 800px; height: 480px; overflow: hidden;}
+        .slide_wrap .slide_img .slide{position: absolute; left: 0; top: 0; transition: all 0.3s;}
+        .slide_wrap .slide_img .slide:nth-child(1) {z-index: 5;}
+        .slide_wrap .slide_img .slide:nth-child(2) {z-index: 4;}
+        .slide_wrap .slide_img .slide:nth-child(3) {z-index: 3;}
+        .slide_wrap .slide_img .slide:nth-child(4) {z-index: 2;}
+        .slide_wrap .slide_img .slide:nth-child(5) {z-index: 1;}
+    </style>
+</head>
+<body style="background: #F4C1A2;">
+    <main>
+        <div class="slide_wrap">
+            <div class="slide_img">
+                <div class="slide" data-name="이미지1"><img src="../common/img/bg1.jpg" alt="이미지1"></div>
+                <div class="slide" data-name="이미지2"><img src="../common/img/bg2.jpg" alt="이미지2"></div>
+                <div class="slide" data-name="이미지3"><img src="../common/img/bg3.jpg" alt="이미지3"></div>
+                <div class="slide" data-name="이미지4"><img src="../common/img/bg4.jpg" alt="이미지4"></div>
+                <div class="slide" data-name="이미지5"><img src="../common/img/bg5.jpg" alt="이미지5"></div>
+            </div>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../javascript/01_slide.html">javaScript Slide Effect01</a></h1>
+        <p>이미지 슬라이드 - 페이드 효과</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li class="active"><a href="../javascript/01_slide.html">1</a></li>
+            <li><a href="../javascript/02_slide.html">2</a></li>
+            <li><a href="../javascript/03_slide.html">3</a></li>
+            <li><a href="../javascript/04_slide.html">4</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_slide.html">1</a></li>
+            <li><a href="../jquery/02_slide.html">2</a></li>
+            <li><a href="../jquery/03_slide.html">3</a></li>
+            <li><a href="../jquery/04_slide.html">4</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    const slide_wrap = document.querySelector('.slide_wrap');
+    const slide_img = document.querySelector('.slide_img');
+    const slide = document.querySelectorAll('.slide');
+
+    let current_index = 0;
+    let slide_count = slide.length;
+
+    setInterval(() =>{
+        let next_index = (current_index + 1) % slide_count;
+
+        slide[current_index].style.opacity="0";
+        slide[next_index].style.opacity="1";
+
+        current_index = next_index;
+    }, 2000);
+</script>
+</html> 

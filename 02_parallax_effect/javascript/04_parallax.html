@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript - scroll 애니메이션</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&amp;display=swap" rel="stylesheet">
+    <style>
+        .paral_nav{position: fixed; right: 20px; top: 20px; background: rgba(0, 0, 0, 0.4); padding: 12px 10px; border-radius: 50px; z-index: 9999; transition: top 0.4s ease;}
+        .paral_nav.hide{top: -200px;}
+        .paral_nav ul{display: flex; padding: 2px 10px;}
+        .paral_nav ul li{width: auto; height: 32px; padding: 0px 20px; font-size: 16px; line-height: 32px; cursor: pointer;}
+        .paral_nav ul li + li{margin-left: 5px;}
+        .paral_nav ul li.active{background: #fff; border: 2px solid #fff; color: #000; border-radius: 30px;}
+        .paral_nav ul li.active span{opacity: 1;}
+        .paral_cont .content-item .num{font-family: 'Lato', sans-serif; font-weight: 100; font-size: 25vw; color: #000; opacity: 0.2; position: absolute; right: -5vw; top: -7vw;}
+        .paral_cont .content-item .title{padding-bottom: 10px; font-weight: 700;}
+        .paral_cont .content-item .img-wrap{width: 100%; padding-bottom: 56%; background: #eee; position: relative; overflow: hidden;}
+        .paral_cont .content-item .img-wrap .img{position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; background-size: cover; background-repeat: no-repeat; filter: saturate(0%); -webkit-filter: saturate(0%); transition: filter 1s, -webkit-filter .5s;}
+        .paral_cont .content-item .desc{font-size: 6vw; line-height: 1.4; margin-top: -6vw; margin-right: -3vw; position: relative; z-index: 100; word-break: keep-all;}
+    </style>
+</head>
+
+<body>
+    <header class="paral_info">
+        <h1><a href="../javascript/04_parallax.html">javaScript Parallax Effect04</a></h1>
+        <p>패럴랙스 스크롤링 효과 - 숨김 메뉴</p>
+    </header>
+    <div class="paral_scroll">ScrollTop(): <span>0</span></div>
+    <!-- //scroll -->
+    <nav class="paral_nav">
+        <ul>
+            <li class="active">메뉴1</li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+            <li>메뉴4</li>
+            <li>메뉴5</li>
+            <li>메뉴6</li>
+            <li>메뉴7</li>
+            <li>메뉴8</li>
+            <li>메뉴9</li>
+        </ul>
+    </nav>
+    <!-- //paral_nav -->
+
+    <div class="paral_cont">
+        <section class="section1 content-item">
+            <span class="num">01</span>
+            <h2 class="title">Section1</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">지붕은 햇빛이 밝을 때 수리해야 합니다.</p>
+        </section>
+        <!-- //section1 -->
+
+        <section class="section2 content-item">
+            <span class="num">02</span>
+            <h2 class="title">Section2</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">여가시간을 가지려면 시간을 잘 써라.</p>
+        </section>
+        <!-- //section2 -->
+
+        <section class="section3 content-item">
+            <span class="num">03</span>
+            <h2 class="title">Section3</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">시간은 인간이 쓸 수 있는 가장 값진 것이다.</p>
+        </section>
+        <!-- //section3 -->
+
+        <section class="section4 content-item">
+            <span class="num">04</span>
+            <h2 class="title">Section4</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">미래의 제국은 마음의 제국이다.</p>
+        </section>
+        <!-- //section4 -->
+
+        <section class="section5 content-item">
+            <span class="num">05</span>
+            <h2 class="title">Section5</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">일 분 전만큼 먼 시간은 없다.</p>
+        </section>
+        <!-- //section5 -->
+    
+        <section class="section6 content-item">
+            <span class="num">06</span>
+            <h2 class="title">Section6</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">복역 중이 아니라면, 충분한 시간이란 결코 없다.</p>
+        </section>
+        <!-- //section6 -->
+    
+        <section class="section7 content-item">
+            <span class="num">07</span>
+            <h2 class="title">Section7</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">유행은 유행에 뒤떨어질 수 밖에 없게 만들어진다.</p>
+        </section>
+        <!-- //section7 -->
+    
+        <section class="section8 content-item">
+            <span class="num">08</span>
+            <h2 class="title">Section8</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">시간은 환상이다. 점심시간은 두 배로 그렇다.</p>
+        </section>
+        <!-- //section8 -->
+
+        <section class="section9 content-item">
+            <span class="num">09</span>
+            <h2 class="title">Section9</h2>
+            <figure class="img-wrap">
+                <div class="img"></div>
+            </figure>
+            <p class="desc">낭비한 시간에 대한 후회는 더 큰 시간 낭비이다.</p>
+        </section>
+        <!-- //section9 -->
+    </div>
+    <!-- //contents -->
+    <footer class="paral_footer">
+        <h1>Parallax <em>Scrolling</em></h1>
+        <div class="footer_info">
+            <h2>JAVASCRIPT</h2>
+            <ul> 
+                <li><a href="../javascript/01_parallax.html">1</a></li>
+                <li><a href="../javascript/02_parallax.html">2</a></li>
+                <li><a href="../javascript/03_parallax.html">3</a></li>
+                <li class="active"><a href="../javascript/04_parallax.html">4</a></li>
+                <li><a href="../javascript/05_parallax.html">5</a></li>
+                <li><a href="../javascript/06_parallax.html">6</a></li>
+                <li><a href="../javascript/07_parallax.html">7</a></li>
+                <li><a href="../javascript/08_parallax.html">8</a></li>
+                <li><a href="../javascript/09_parallax.html">VH</a></li>
+            </ul>
+        </div>
+        <div class="footer_info">
+            <h2>JQUERY</h2>
+            <ul>
+                <li><a href="../jquery/01_parallax.html">1</a></li>
+                <li><a href="../jquery/02_parallax.html">2</a></li>
+                <li><a href="../jquery/03_parallax.html">3</a></li>
+                <li><a href="../jquery/04_parallax.html">4</a></li>
+                <li><a href="../jquery/05_parallax.html">5</a></li>
+                <li><a href="../jquery/06_parallax.html">6</a></li>
+                <li><a href="../jquery/07_parallax.html">7</a></li>
+                <li><a href="../jquery/08_parallax.html">8</a></li>
+                <li><a href="../jquery/09_parallax.html">V</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script>
+    //버튼 클릭 시 영역 이동
+    let items = document.querySelectorAll(".paral_nav ul li");  //메뉴
+    let sectionIndex = document.querySelectorAll(".paral_cont .content-item");  //section
+
+    items.forEach(el => {
+        el.addEventListener("click", e => {
+            e.preventDefault();
+            let arrli = Array.from(items).indexOf(e.currentTarget); //현재 클릭하는 index
+            sectionIndex[arrli].scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+    });
+
+    let nowScrollTop;
+    let lastScrollTop = 0;
+
+    function scrollProgress(){
+        nowScrollTop = true;
+
+        setInterval(() => {
+            if(nowScrollTop){
+                nowScrollTop = false;
+                hasScroll();
+            }
+        }, 1000);
+    }
+
+    function hasScroll(){
+        let scrollTop = document.documentElement.scrollTop || window.scrollY || window.pageYOffset;
+
+        (scrollTop >= lastScrollTop) ? document.querySelector('.paral_nav').classList.add('hide') : document.querySelector('.paral_nav').classList.remove('hide');
+
+        lastScrollTop = scrollTop;
+        
+        //버튼용
+        document.querySelectorAll('.content-item').forEach((item, index) => {
+            if(scrollTop >= item.offsetTop - 2){
+                document.querySelectorAll('.paral_nav ul li').forEach(li => {
+                    li.classList.remove("active");
+                });
+                document.querySelector('.paral_nav ul li:nth-child('+(index+1)+')').classList.add('active');
+            }
+        });
+        
+        //info
+        document.querySelector(".paral_scroll span").innerText = parseInt(scrollTop) + "px";
+    }
+
+    //출력용
+    window.addEventListener('scroll', scrollProgress);
+
+    
+</script>
+
+</html>

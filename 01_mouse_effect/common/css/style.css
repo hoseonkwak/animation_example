@@ -1,0 +1,116 @@
+.mouseCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+.info {
+  color: #fff;
+  font-family: "NEXONLv1Gothic";
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.info.right {
+  left: auto;
+  right: 0px;
+}
+
+.info.bottom {
+  top: auto;
+  left: auto;
+  bottom: 0;
+  right: 0;
+}
+
+.info.left {
+  top: auto;
+  left: 0;
+  bottom: 0;
+}
+
+.info h1 {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.6;
+  border-bottom: 1px dashed #fff;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.info h1 a {
+  color: #fff;
+}
+
+.info p {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.info li {
+  list-style: none;
+  display: inline;
+}
+
+.info li a {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+  border: 1px dashed #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.info li.active a {
+  background: #fff;
+  color: #000;
+}
+
+.info.list {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  padding: 20px;
+  font-size: 12px;
+  line-height: 1.8;
+  border-radius: 10px;
+}
+
+.info.list li {
+  display: block;
+}
+
+.info button {
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 5px 20px;
+  color: #fff;
+  border-radius: 50px;
+  -webkit-box-sizing: 0 0 0 #fff inset;
+  box-sizing: 0 0 0 #fff inset;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.info button:hover {
+  -webkit-box-shadow: 0 -50px 0 #fff inset;
+  box-shadow: 0 -50px 0 #fff inset;
+  color: #000;
+  cursor: pointer;
+}

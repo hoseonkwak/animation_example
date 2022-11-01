@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript - 슬라이더4</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .slide_img{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 800px; height: 480px; overflow: hidden;}
+        .slide_img .slide_inner{position: relative; width: 4800px; height: 480px; transition: all 0.6s; left: 0;}
+        .slide_img .slide_inner .slide{position: relative; float: left; width: 800px; height: 480px;}
+        .slide_inner .slide:nth-child(1) {z-index: 5;}
+        .slide_inner .slide:nth-child(2) {z-index: 4;}
+        .slide_inner .slide:nth-child(3) {z-index: 3;}
+        .slide_inner .slide:nth-child(4) {z-index: 2;}
+        .slide_inner .slide:nth-child(5) {z-index: 1;}
+        .slide_btn span{position: absolute; top: 50%; transform: translateY(-50%); z-index: 9999; width: 50px; height: 50px; background: rgba(0, 0, 0, 0.4); text-align: center; line-height: 50px; display: block; color: #fff; transition: all 0.2s; cursor: pointer;}
+        .slide_btn span:hover{background: #f16056;}
+        .slide_btn span.prev{left: 0;}
+        .slide_btn span.next{right: 0;}
+        .slide_dot{position: absolute; left: 50%; transform: translateX(-50%); bottom: 20px;}
+        .slide_dot .dot{width: 20px; height: 20px; background: rgba(0, 0, 0, 0.4); display: inline-block; border-radius: 50%; transition: all 0.3s; text-indent: -9999px; margin: 3px; cursor: pointer;}
+        .slide_dot .dot.active{background: rgba(255, 255, 255, 0.9);}
+    </style>
+</head>
+<body style="background: #F4C1A2;">
+    <main>
+        <div class="slide_wrap">
+            <div class="slide_img">
+                <div class="slide_inner">
+                    <div class="slide" data-name="이미지1"><img src="../common/img/bg1.jpg" alt="이미지1"></div>
+                    <div class="slide" data-name="이미지2"><img src="../common/img/bg2.jpg" alt="이미지2"></div>
+                    <div class="slide" data-name="이미지3"><img src="../common/img/bg3.jpg" alt="이미지3"></div>
+                    <div class="slide" data-name="이미지4"><img src="../common/img/bg4.jpg" alt="이미지4"></div>
+                    <div class="slide" data-name="이미지5"><img src="../common/img/bg5.jpg" alt="이미지5"></div>
+                </div>
+            </div>
+            <div class="slide_btn">
+                <span class="prev">prev</span>
+                <span class="next">next</span>
+            </div>
+            <div class="slide_dot">
+            </div>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../javascript/04_slide.html">javascript Slide Effect04</a></h1>
+        <p>이미지 슬라이드 - 닷 메뉴 추가</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_slide.html">1</a></li>
+            <li><a href="../javascript/02_slide.html">2</a></li>
+            <li><a href="../javascript/03_slide.html">3</a></li>
+            <li class="active"><a href="../javascript/04_slide.html">4</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_slide.html">1</a></li>
+            <li><a href="../jquery/02_slide.html">2</a></li>
+            <li><a href="../jquery/03_slide.html">3</a></li>
+            <li><a href="../jquery/04_slide.html">4</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    const slide_wrap = document.querySelector('.slide_wrap');
+    const slide_img = document.querySelector('.slide_img');
+    const slide_inner = document.querySelector('.slide_inner');
+    const slide = slide_inner.querySelectorAll('.slide');
+    const slide_btn = slide_wrap.querySelector('.slide_btn');
+    const slide_btn_prev = slide_btn.querySelector('.prev');
+    const slide_btn_next = slide_btn.querySelector('.next');
+    const slide_dot = slide_wrap.querySelector('.slide_dot');
+
+    let slide_count = slide.length;
+    let current_index = 0;
+    let slide_width = document.querySelector('.slide').offsetWidth;
+    let slide_total_width = slide_width * slide_count;
+    let dot_index = '';
+
+    //즉시 실행 함수
+    (() =>{
+        //기본 세팅
+        slide_inner.style.width = slide_total_width + "px";
+        slide_inner.style.transition = "all 0.5s ease-in";
+        slide_inner.style.left = 0;
+
+        //닷 메뉴 세팅
+        slide.forEach((e, i) => {
+            let active = "";
+            if(i == 0) active = "active";
+            dot_index += `<span class='dot ${active}'>${i}</span>`;
+        });
+    
+        slide_dot.innerHTML = dot_index;
+    })();
+
+    //이미지 움직이기
+    const goto_slide = (num) => {
+        slide_inner.style.left = -slide_width * num + "px";
+        current_index = num;
+    }
+
+    //왼쪽버튼
+    const btn_prev = (e) => {
+        e.preventDefault();
+        let prev_index = (current_index - 1) % slide_count;
+        if(current_index == 0) prev_index = slide_count -1;
+        goto_slide(prev_index);
+        dot_active();
+    }
+    
+    //오른쪽버튼
+    const btn_next = (e) => {
+        e.preventDefault();
+        let next_index = (current_index + 1) % slide_count;
+        goto_slide(next_index);
+        dot_active();
+    }
+
+    //닷 메뉴 활성화
+    function dot_active(){
+        slide_dot.querySelectorAll('span').forEach((e,i) => {
+            i == current_index ? e.classList.add('active') : e.classList.remove('active');
+        });
+        slide_dot.querySelectorAll('span')[current_index].classList.add('active');
+    }
+
+    //닷 메뉴 클릭시 이동
+    slide_dot.querySelectorAll('span').forEach((dot, index) => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            goto_slide(index);
+            dot_active();
+        });
+    });
+
+    slide_btn_prev.addEventListener('click', btn_prev);
+    slide_btn_next.addEventListener('click', btn_next);
+    
+</script>
+</html> 

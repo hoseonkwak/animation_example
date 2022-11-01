@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse effect 6</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .cursor {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: url(../common/img/bg6.jpg) center center;
+            background-attachment: fixed;
+            background-size: cover;
+            border: 5px solid #fff;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .contents {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+            cursor: none;
+        }
+        .contents p {
+            max-width: 70vw;
+            font-size: 3vw;
+            text-align: justify;
+            color: #fff;
+        }
+        .contents p:first-child {
+            font-size: 2vw;
+            line-height: 2;
+        }
+        .contents p em {
+            color: rgb(242, 255, 121);
+            border-bottom: 2px dashed rgb(242, 255, 121);
+            font-style: normal;
+        }
+    </style>
+</head>
+<body style="background: #8ab361;">
+    <main>
+        <div class="cursor"></div>
+
+        <div class="contents">
+            <p>A good plan, violently executed now, is better than a perfect plan next week</p>
+            <p>지금 적극적으로 실행되는 <em>괜찮은 계획</em>이 다음 주의 <em>완벽한 계획</em>보다 낫다</p>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../jqeury/06_mouse.html">jQuery Mouse Effect06</a></h1>
+        <p>마우스 이펙트 - 조명효과</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_mouse.html">1</a></li>
+            <li><a href="../javascript/02_mouse.html">2</a></li>
+            <li><a href="../javascript/03_mouse.html">3</a></li>
+            <li><a href="../javascript/04_mouse.html">4</a></li>
+            <li><a href="../javascript/05_mouse.html">5</a></li>
+            <li><a href="../javascript/06_mouse.html">6</a></li>
+            <li><a href="../javascript/07_mouse.html">7</a></li>
+            <li><a href="../javascript/08_mouse.html">8</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_mouse.html">1</a></li>
+            <li><a href="../jquery/02_mouse.html">2</a></li>
+            <li><a href="../jquery/03_mouse.html">3</a></li>
+            <li><a href="../jquery/04_mouse.html">4</a></li>
+            <li><a href="../jquery/05_mouse.html">5</a></li>
+            <li class="active"><a href="../jquery/06_mouse.html">6</a></li>
+            <li><a href="../jquery/07_mouse.html">7</a></li>
+            <li><a href="../jquery/08_mouse.html">8</a></li>
+        </ul>
+    </div>
+    <div class="info left list">
+        <ul>
+            <li>pageX : <span class="pageX"></span></li>
+            <li>pageY : <span class="pageY"></span></li>
+        </ul>
+    </div>
+</body>
+<script>
+    //커서 가운데
+    const cursor_hw = $('.cursor').width()/2;
+    const cursor_hh = $('.cursor').height()/2;
+
+    //마우스 움직이기
+    $(window).mousemove(function(e){
+        gsap.to('.cursor',{duration: 0.5, left: e.pageX - cursor_hw, top: e.pageY - cursor_hh});
+
+        let pageX = e.pageX;
+        let pageY = e.pageY;
+
+        //출력
+        $('.pageX').text(pageX);
+        $('.pageY').text(pageY);
+    });
+</script>
+</html>

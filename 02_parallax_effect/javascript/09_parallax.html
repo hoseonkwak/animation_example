@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript - scroll 애니메이션9</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&amp;display=swap" rel="stylesheet">
+    <style>
+        header.paral_info{position: fixed; left: 0; top: 0; padding: 20px; z-index: 9999;}
+        .content_item{position: relative; width: 100%; height: 100vh;}
+        .content_item .content_item_num{font-size: 8vw; padding: 12vw; display: inline-block;}
+        .sce3{position: fixed; left: 0; top: 0; z-index: 8888; width: 6000px; height: 100vh; background: rgb(229, 93, 93); overflow: hidden;}
+        .sce3 > div{float: left; width: 100vw; height: 100vh;}
+        .sce3 > div:nth-child(1){
+            background: rgba(71,61,61,0.9);
+        }
+        .sce3 > div:nth-child(2){
+            background: rgba(71,61,61,0.8);
+        }
+        .sce3 > div:nth-child(3){
+            background: rgba(71,61,61,0.7);
+        }
+        .sce3 > div:nth-child(4){
+            background: rgba(71,61,61,0.6);
+        }
+        .sce3 > div:nth-child(5){
+            background: rgba(71,61,61,0.5);
+        }
+        .sce3 > div:nth-child(6){
+            background: rgba(71,61,61,0.4);
+        }
+
+        .section1 {background: #111; z-index: 9000;}
+        .section2 {background: #222; z-index: 8000;}
+        .section3 {background: #333; z-index: 7000; height: 6000px;}
+        .section4 {background: #444; z-index: 7100;}
+        .section5 {background: #555; z-index: 7200;}
+        .section6 {background: #666; z-index: 7300;}
+        .section7 {background: #777; z-index: 7400;}
+        .section8 {background: #888; z-index: 7500;}
+        .section9 {background: #999; z-index: 7600;}
+    </style>
+</head>
+
+<body>
+    <header class="paral_info">
+        <h1><a href="../javascript/08_parallax.html">javaScript Parallax Effect09</a></h1>
+        <p>패럴랙스 스크롤링 효과 - 가로 세로 모드</p>
+    </header>
+
+    <div class="paral_cont">
+        <section class="content_item section1">
+            <span class="content_item_num">01</span>
+        </section>
+        <!-- //section1 -->
+        <section class="content_item section2">
+            <span class="content_item_num">02</span>
+        </section>
+        <!-- //section2 -->
+        <section class="content_item section3">
+            <span class="content_item_num">03</span>
+            <div class="sce3 clearfix">
+                <div>03-1</div>
+                <div>03-2</div>
+                <div>03-3</div>
+                <div>03-4</div>
+                <div>03-5</div>
+                <div>03-6</div>
+            </div>
+        </section>
+        <!-- //section3 -->
+        <section class="content_item section4">
+            <span class="content_item_num">04</span>
+        </section>
+        <!-- //section4 -->
+        <section class="content_item section5">
+            <span class="content_item_num">05</span>
+        </section>
+        <!-- //section5 -->
+        <section class="content_item section6">
+            <span class="content_item_num">06</span>
+        </section>
+        <!-- //section6 -->
+        <section class="content_item section7">
+            <span class="content_item_num">07</span>
+        </section>
+        <!-- //section7 -->
+        <section class="content_item section8">
+            <span class="content_item_num">08</span>
+        </section>
+        <!-- //section8 -->
+        <section class="content_item section9">
+            <span class="content_item_num">09</span>
+        </section>
+        <!-- //section9 -->
+    </div>
+    <!-- //contents -->
+    <footer class="paral_footer">
+        <h1>Parallax <em>Scrolling</em></h1>
+        <div class="footer_info">
+            <h2>JAVASCRIPT</h2>
+            <ul> 
+                <li><a href="../javascript/01_parallax.html">1</a></li>
+                <li><a href="../javascript/02_parallax.html">2</a></li>
+                <li><a href="../javascript/03_parallax.html">3</a></li>
+                <li><a href="../javascript/04_parallax.html">4</a></li>
+                <li><a href="../javascript/05_parallax.html">5</a></li>
+                <li><a href="../javascript/06_parallax.html">6</a></li>
+                <li><a href="../javascript/07_parallax.html">7</a></li>
+                <li><a href="../javascript/08_parallax.html">8</a></li>
+                <li class="active"><a href="../javascript/09_parallax.html">VH</a></li>
+            </ul>
+        </div>
+        <div class="footer_info">
+            <h2>JQUERY</h2>
+            <ul>
+                <li><a href="../jquery/01_parallax.html">1</a></li>
+                <li><a href="../jquery/02_parallax.html">2</a></li>
+                <li><a href="../jquery/03_parallax.html">3</a></li>
+                <li><a href="../jquery/04_parallax.html">4</a></li>
+                <li><a href="../jquery/05_parallax.html">5</a></li>
+                <li><a href="../jquery/06_parallax.html">6</a></li>
+                <li><a href="../jquery/07_parallax.html">7</a></li>
+                <li><a href="../jquery/08_parallax.html">8</a></li>
+                <li><a href="../jquery/09_parallax.html">V</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<script>
+    window.addEventListener("scroll", function(){
+        let scrollTop = document.documentElement.scrollTop || window.scrollY || window.pageYOffset;
+        let sec3_top = document.querySelector('.section3').offsetTop;
+        let goLeft = scrollTop - sec3_top;
+
+        if(scrollTop > sec3_top){
+            console.log(sec3_top);
+            document.querySelector('.sce3').style.left = "-"+goLeft+"px";
+        }
+    });
+</script>
+</html>

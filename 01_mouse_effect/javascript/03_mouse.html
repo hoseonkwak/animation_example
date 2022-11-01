@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse effect3</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .mouseCont {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            cursor: none;
+        }
+        .mouseCont p {
+            font-size: 2.5vw;
+            line-height: 2.3;
+            font-weight: 300;
+        }
+        .mouseCont h2 {
+            font-size: 3vw;
+            font-weight: normal;
+            font-weight: 400;
+        }
+        .mouseCont em {
+            font-style: normal;
+            border-bottom: 0.2vw dashed rgb(56, 208, 255);
+            color: rgb(56, 208, 255);
+        }
+        .cursor {
+            position: absolute;
+            left: 0; top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 9999;
+            background-color: #fff;
+            user-select: none;
+            pointer-events: none;
+            transition: transform 0.3s;
+            mix-blend-mode: difference;
+        }
+        .cursor.active {
+            transform: scale(20);
+        }
+        .info.left.list li{cursor: pointer;}
+        .info.left.list li.active {
+            text-decoration: underline;
+            color: rgb(56, 208, 255);
+        }
+    </style>
+</head>
+<body style="background: #b93131;">
+    <main>
+        <div class="cursor"></div>
+
+        <article class="mouseCont">
+            <p>The best way to predict the future is to <em>invent</em> it</p>
+            <h2>미래를 예측하는 최선의 방법은 미래를 <em>창조</em>하는 것이다</h2>
+        </article>
+    </main>
+    <div class="info">
+        <h1><a href="../javascript/03_mouse.html">javaScript Mouse Effect03</a></h1>
+        <p>마우스 이펙트 - 브랜딩 이펙트</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_mouse.html">1</a></li>
+            <li><a href="../javascript/02_mouse.html">2</a></li>
+            <li class="active"><a href="../javascript/03_mouse.html">3</a></li>
+            <li><a href="../javascript/04_mouse.html">4</a></li>
+            <li><a href="../javascript/05_mouse.html">5</a></li>
+            <li><a href="../javascript/06_mouse.html">6</a></li>
+            <li><a href="../javascript/07_mouse.html">7</a></li>
+            <li><a href="../javascript/08_mouse.html">8</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_mouse.html">1</a></li>
+            <li><a href="../jquery/02_mouse.html">2</a></li>
+            <li><a href="../jquery/03_mouse.html">3</a></li>
+            <li><a href="../jquery/04_mouse.html">4</a></li>
+            <li><a href="../jquery/05_mouse.html">5</a></li>
+            <li><a href="../jquery/06_mouse.html">6</a></li>
+            <li><a href="../jquery/07_mouse.html">7</a></li>
+            <li><a href="../jquery/08_mouse.html">8</a></li>
+        </ul>
+    </div>
+    <div class="info left list">
+        <ul>
+            <li>multiply</li>
+            <li>screen</li>
+            <li>overlay</li>
+            <li>darken</li>
+            <li>lighten</li>
+            <li>color-dodge</li>
+            <li>color-burn</li>
+            <li>hard-light</li>
+            <li>soft-light</li>
+            <li class="active">difference</li>
+            <li>exclusion</li>
+            <li>hue</li>
+            <li>saturation</li>
+            <li>color</li>
+            <li>luminosity</li>
+        </ul>
+    </div>
+</body>
+<script>
+    //출력용
+    document.querySelectorAll(".info.left.list li").forEach(info => {
+        info.addEventListener("click", function(){                       
+            document.querySelectorAll(".info.left.list li").forEach(li => {
+                li.classList.remove("active");
+                this.classList.add("active");
+            });
+
+            let text = info.textContent || info.innerText;  //최근 버전 || 옛날 버전
+            document.querySelector(".cursor").style.mixBlendMode = text;
+        });
+    });
+
+    //움직임 효과
+    const w = document.querySelector(".cursor").clientWidth/2;    //offsetWidth도 가능
+    const h = document.querySelector(".cursor").clientHeight/2;    //offsetHeight도 가능
+
+    document.addEventListener("mousemove", e => {
+        gsap.to(".cursor", {duration: .5, left: e.pageX - w, top: e.pageY -h});
+    });
+
+    //오버 효과
+    document.querySelectorAll(".mouseCont").forEach(em => {
+        em.addEventListener("mouseenter", () => {
+            document.querySelector(".cursor").classList.add("active");
+        });
+        em.addEventListener("mouseleave", () => {
+            document.querySelector(".cursor").classList.remove("active");
+        });
+    });
+</script>
+</html>

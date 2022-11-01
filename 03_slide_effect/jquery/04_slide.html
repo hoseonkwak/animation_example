@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery - 슬라이더4</title>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <style>
+        .slide_img{width: 600px; height: 360px; overflow: hidden; margin: 0 5px;}
+        .slide_img .slide_inner{position: relative; width: 600px; height: 1800px; transition: all 0.6s; left: 0;}
+        .slide_img .slide_inner .slide{float: left; width: 600px; height: 360px; position: relative;}
+        .slide_img .slide_inner.inner2 .slide{position: absolute; top: 0; width: 600px; height: 360px;}
+    </style>
+</head>
+<body style="background: #9a79af;">
+    <main>
+        <div class="slide_wrap">
+            <div class="slide_img slide_img1">
+                <div class="slide_inner inner1">
+                    <div class="slide slide1" data-name="이미지1"><img src="../common/img/bg1.jpg" alt="이미지1"></div>
+                    <div class="slide slide1" data-name="이미지2"><img src="../common/img/bg2.jpg" alt="이미지2"></div>
+                    <div class="slide slide1" data-name="이미지3"><img src="../common/img/bg3.jpg" alt="이미지3"></div>
+                    <div class="slide slide1" data-name="이미지4"><img src="../common/img/bg4.jpg" alt="이미지4"></div>
+                    <div class="slide slide1" data-name="이미지5"><img src="../common/img/bg5.jpg" alt="이미지5"></div>
+                </div>
+            </div>
+            <div class="slide_img slide_img2">
+                <div class="slide_inner inner2">
+                    <div class="slide slide2" data-name="이미지1"><img src="../common/img/bg1.jpg" alt="이미지1"></div>
+                    <div class="slide slide2" data-name="이미지2"><img src="../common/img/bg2.jpg" alt="이미지2"></div>
+                    <div class="slide slide2" data-name="이미지3"><img src="../common/img/bg3.jpg" alt="이미지3"></div>
+                    <div class="slide slide2" data-name="이미지4"><img src="../common/img/bg4.jpg" alt="이미지4"></div>
+                    <div class="slide slide2" data-name="이미지5"><img src="../common/img/bg5.jpg" alt="이미지5"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../jquery/04_slide.html">jQuery Slide Effect04</a></h1>
+        <p>이미지 슬라이드 - 위로 움직이기</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_slide.html">1</a></li>
+            <li><a href="../javascript/02_slide.html">2</a></li>
+            <li><a href="../javascript/03_slide.html">3</a></li>
+            <li><a href="../javascript/04_slide.html">4</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_slide.html">1</a></li>
+            <li><a href="../jquery/02_slide.html">2</a></li>
+            <li><a href="../jquery/03_slide.html">3</a></li>
+            <li class="active"><a href="../jquery/04_slide.html">4</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    //slide1
+    const slide_img1 = $('.slide_img1');
+    const inner1 = $('.inner1');
+    const slide1 = $('.slide1');
+
+    let current_index1 = 0;
+    let slideHeight1 = slide1.height();
+
+    setInterval(function(){
+        current_index1 < 4 ? current_index1++ : current_index1 = 0;
+
+        let slidePosition = current_index1 * -slideHeight1;
+        inner1.animate({top: slidePosition}, 100, "easeOutExpo");
+    }, 3000);
+
+    //slide2
+    const slide_img2 = $('.slide_img2');
+    const inner2 = $('.inner2');
+    const slide2 = $('.slide2');
+
+    let current_index2 = 0;
+    let slideHeight2 = slide2.height();
+    let slide2_count = slide2.length;
+
+    for(let i in slide2){
+        slide2.eq(i).css('top', i*slideHeight2);
+    }
+
+    function slideImg(){
+        let n = (current_index2 + 1) % slide2_count;
+        slide2.eq(current_index2).animate({top: slideHeight2 * (-1)}, 600);
+        slide2.eq(n).animate({top: 0}, 600);
+        slide2.eq(n+1).animate({top: slideHeight2}, 600);
+        
+        slide2.eq(current_index2).animate({top: slideHeight2}, 0);
+        inner2.append(slide2.eq(current_index2));
+
+        current_index2 = n;
+    }
+    
+    setInterval(slideImg, 3000);
+
+    
+</script>
+</html> 

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse effect 7</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <link rel="stylesheet" href="../common/css/set.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <style>
+        .text_wrap{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -20%); color: #fff; font-size: 3vw; line-height: 1.5;}
+        .text_wrap .line{width: 100%; display: flex;}
+        .text_wrap .line .left{width: 50vw; color: #09305e; overflow: hidden; transform: skew(0deg, -15deg);}
+        .text_wrap .line .left .span_wrap{width:100vw; text-align: center;}
+        .text_wrap .line .right{width: 50vw; overflow: hidden; transform: skew(0deg, 15deg);}
+        .text_wrap .line .right .span_wrap{width: 100vw; text-align: center; transform: translateX(-50vw);}
+        .text_wrap span{display: block;}
+        .img_wrap{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 50%;}
+        .img_wrap img{width: 100%;}
+    </style>
+</head>
+<body style="background: #8ab361;">
+    <main>
+        <div class="cursor"></div>
+
+        <div class="contents">
+            <div class="moveImage">
+                <div class="img_wrap">
+                    <img src="../common/img/bg7.jpg" alt="이미지">
+                </div>
+                <div class="text_wrap">
+                    <div class="line">
+                        <div class="left">
+                            <div class="span_wrap">
+                                <span class="span_slow">Laughter is</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="span_wrap">
+                                <span class="span_slow">Laughter is</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="left">
+                            <div class="span_wrap">
+                                <span class="span_fast">the relief</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="span_wrap">
+                                <span class="span_fast">the relief</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="left">
+                            <div class="span_wrap">
+                                <span class="span_slow">웃음은</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="span_wrap">
+                                <span class="span_slow">웃음은</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="left">
+                            <div class="span_wrap">
+                                <span class="span_fast">안정제다</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="span_wrap">
+                                <span class="span_fast">안정제다</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="info">
+        <h1><a href="../jquery/07_mouse.html">jQuery Mouse Effect07</a></h1>
+        <p>마우스 이펙트 - 텍스트 효과</p>
+    </div>
+    <div class="info right">
+        <ul>
+            <li><a href="../javascript/01_mouse.html">1</a></li>
+            <li><a href="../javascript/02_mouse.html">2</a></li>
+            <li><a href="../javascript/03_mouse.html">3</a></li>
+            <li><a href="../javascript/04_mouse.html">4</a></li>
+            <li><a href="../javascript/05_mouse.html">5</a></li>
+            <li><a href="../javascript/06_mouse.html">6</a></li>
+            <li><a href="../javascript/07_mouse.html">7</a></li>
+            <li><a href="../javascript/08_mouse.html">8</a></li>
+        </ul>
+        <ul>
+            <li><a href="../jquery/01_mouse.html">1</a></li>
+            <li><a href="../jquery/02_mouse.html">2</a></li>
+            <li><a href="../jquery/03_mouse.html">3</a></li>
+            <li><a href="../jquery/04_mouse.html">4</a></li>
+            <li><a href="../jquery/05_mouse.html">5</a></li>
+            <li><a href="../jquery/06_mouse.html">6</a></li>
+            <li class="active"><a href="../jquery/07_mouse.html">7</a></li>
+            <li><a href="../jquery/08_mouse.html">8</a></li>
+        </ul>
+    </div>
+    <div class="info left list">
+        <ul>
+            <li>pageX : <span class="pageX"></span></li>
+            <li>pageY : <span class="pageY"></span></li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    $(window).mousemove(function(e){
+        let position_slow = (e.pageX - $(window).width()/2)*0.1;
+        let position_fast = (e.pageX - $(window).width()/2)*0.2;
+
+        gsap.to('.span_slow',{duration: 0.4, x: position_slow});
+        gsap.to('.span_fast',{duration: 0.4, x: -position_fast});
+
+        //마우스 값
+        let pageX = e.pageX;
+        let pageY = e.pageY;
+
+        //출력
+        $('.pageX').text(pageX);
+        $('.pageY').text(pageY);
+    });
+</script>
+</html>

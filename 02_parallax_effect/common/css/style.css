@@ -1,0 +1,73 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 300;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 400;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NEXONLv1Gothic';
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Bold.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NEXONLv2Gothic';
+  font-weight: 300;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Light.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NEXONLv2Gothic';
+  font-weight: 400;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NEXONLv2Gothic';
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Bold.woff") format("woff");
+  font-style: normal;
+}
+
+body{background: #c5c58c; color: #fff; font-family: 'NEXONLv1Gothic';}
+.paral_info{padding: 40px 20px 20px; user-select: none;}
+.paral_info h1{display: inline-block; font-size: 20px; border-bottom: 1px dashed #fff; margin-bottom: 8px; font-weight: normal;}
+.paral_info p{font-size: 14px; line-height: 1.8;}
+.paral_scroll{position: fixed; left: 20px; bottom: 20px; z-index: 1000; background: rgba(0, 0, 0, 0.4); color: #fff; height: 40px; line-height: 40px; border-radius: 50px; text-align: center; font-size: 12px; padding: 0 20px;}
+.paral_cont{width: 100%; overflow: hidden; font-family: "NEXONLv1Gothic";}
+.paral_cont .content-item{width: 1000px; max-width: 70vw; margin: 30vw 0; padding-top: 10vw; text-align: right; position: relative;}
+.paral_cont .content-item .img-wrap .img:hover{filter: saturate(100%);}
+.paral_cont .content-item:nth-child(even){margin-left: auto; text-align: left;}
+.paral_cont .content-item:nth-child(even) .num{right: auto; left: -5vw;}
+.paral_cont .content-item:nth-child(even) .desc{margin-right: auto; margin-left: -3vw;}
+.content-item:nth-child(1) .img {background-image: url(../img/bg1.jpg);}
+.content-item:nth-child(2) .img {background-image: url(../img/bg2.jpg);}
+.content-item:nth-child(3) .img {background-image: url(../img/bg3.jpg);}
+.content-item:nth-child(4) .img {background-image: url(../img/bg4.jpg);}
+.content-item:nth-child(5) .img {background-image: url(../img/bg5.jpg);}
+.content-item:nth-child(6) .img {background-image: url(../img/bg6.jpg);}
+.content-item:nth-child(7) .img {background-image: url(../img/bg7.jpg);}
+.content-item:nth-child(8) .img {background-image: url(../img/bg8.jpg);}
+.content-item:nth-child(9) .img {background-image: url(../img/bg9.jpg);}
+
+.paral_footer{padding: 200px 0;}
+.paral_footer h1{font-size: 8vw; line-height: 1.2; padding: 10vw 8vw 0 8vw; text-transform: uppercase; margin-bottom: 3vw;}
+.paral_footer h1 em{display: block; font-family: 'Lato', sans-serif; font-weight: 100; padding-left: 18vw; font-style: normal;}
+.paral_footer .footer_info{display: flex; align-items: center; justify-content: center; background: #000; padding: 15px 20px; margin-bottom: 2px;}
+.paral_footer .footer_info h2{padding-right: 20px;}
+.paral_footer .footer_info ul{display: flex;}
+.paral_footer .footer_info ul li + li{margin-left: 10px;}
+.paral_footer .footer_info ul li a{display: flex; width: 30px; height: 30px; border: 1px dashed #fff; border-radius: 50px; justify-content: center; line-height: 30px; font-size: 12px;}
+.paral_footer .footer_info ul li.active{background: #fff; color: #000; border-radius: 50px;}
