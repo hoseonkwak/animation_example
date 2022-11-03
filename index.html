@@ -1,32 +1,97 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>애니메이션 예제</title>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r99/three.min.js' integrity='sha512-0tlhMhMGPohLm/YwaskxH7jJuUGqU/XPTl+HE0dWrhGbpEBRIZYMQdbHC0CmyNPzZKTBd8JoVZnvMcL7hzlFOg==' crossorigin='anonymous'></script>
-    <script src="./common/js/animation_open.js"></script>
-    <link rel="stylesheet" href="./common/css/set.css">
-    <style>
-        body{overflow: hidden;}
-        #world{position: relative; width: 100%; height: 100%; overflow: hidden; background: linear-gradient(#e4e0ba, #f7d9aa);}
-        .title{position: absolute; top: 10%; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #f59f2b 40%, #de07ff); font-size: 6vw; font-weight: normal; text-transform: uppercase; letter-spacing: -0.09em; -webkit-text-fill-color: transparent; -webkit-background-clip: text; white-space: nowrap; user-select: none;}
-        .nav{position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%); width: 100%;}
-        .nav ul{display: flex; justify-content: space-evenly;}
-        .nav ul li{display: flex;}
-        .nav ul li a{width: 13vw; height: 6vw; max-width: 250px; max-height: 100px; color: #fff; border: 2px solid #fff; border-radius: 50px; text-align: center; margin: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.5vw; font-weight: bold; background: rgba(255, 255, 255, .7); color: #111; user-select: none; transition: all 0.3s;}
-        .nav ul li a:hover{background: rgba(0, 0, 0, 0.6); color: #fff;}
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>애니메이션 예제</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+	<script src="./common/js/animation_open.js"></script>
+	<link rel="stylesheet" href="./common/css/set.css">
+	<style>
+		body {
+			overflow: hidden;
+		}
+
+		#world {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background: linear-gradient(#e4e0ba, #f7d9aa);
+		}
+
+		.title {
+			position: absolute;
+			top: 10%;
+			left: 50%;
+			transform: translateX(-50%);
+			background: linear-gradient(to bottom, #f59f2b 40%, #de07ff);
+			font-size: 6vw;
+			font-weight: normal;
+			text-transform: uppercase;
+			letter-spacing: -0.09em;
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: text;
+			white-space: nowrap;
+			user-select: none;
+		}
+
+		.nav {
+			position: absolute;
+			bottom: 5%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+		}
+
+		.nav ul {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.nav ul li {
+			display: flex;
+		}
+
+		.nav ul li a {
+			width: 13vw;
+			height: 6vw;
+			max-width: 250px;
+			max-height: 100px;
+			color: #fff;
+			border: 2px solid #fff;
+			border-radius: 50px;
+			text-align: center;
+			margin: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 1.5vw;
+			font-weight: bold;
+			background: rgba(255, 255, 255, .7);
+			color: #111;
+			user-select: none;
+			transition: all 0.3s;
+		}
+
+		.nav ul li a:hover {
+			background: rgba(0, 0, 0, 0.6);
+			color: #fff;
+		}
+	</style>
 </head>
+
 <body>
-    <div id="world"></div>
-    <h1 class="title">example</h1>
-    <nav class="nav">
-        <ul>
-            <li><a href="./01_mouse_effect/mouse_effect.html">MOUSE EFFECT</a></li>
-            <li><a href="./02_parallax_effect/parallax_effect.html">PARALLAX EFFECT</a></li>
-            <li><a href="./03_slide_effect/slider_effect.html">SLIDER EFFECT</a></li>
-        </ul>
-    </nav>
+	<div id="world"></div>
+	<h1 class="title">example</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="./01_mouse_effect/mouse_effect.html">MOUSE EFFECT</a></li>
+			<li><a href="./02_parallax_effect/parallax_effect.html">PARALLAX EFFECT</a></li>
+			<li><a href="./03_slide_effect/slider_effect.html">SLIDER EFFECT</a></li>
+		</ul>
+	</nav>
 </body>
+
 </html>
